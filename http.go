@@ -6,7 +6,7 @@ import (
 	"sort"
 	"time"
 
-	"github.com/deepch/vdk/format/mp4f"
+	"github.com/dbl0null/vdk/format/mp4f"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/net/websocket"
 )
@@ -41,7 +41,7 @@ func serveHTTP() {
 	router.StaticFS("/static", http.Dir("web/static"))
 	err := router.Run(Config.Server.HTTPPort)
 	if err != nil {
-		log.Fatalln(err)
+		log.Fatalln("Start HTTP Server error", err)
 	}
 }
 func ws(ws *websocket.Conn) {
@@ -77,6 +77,9 @@ func ws(ws *websocket.Conn) {
 					start = true
 				}
 				if !start {
+					continue
+				}
+				if pck.Idx > int8(len(codecs)-1) {
 					continue
 				}
 				ready, buf, _ := muxer.WritePacket(pck, false)

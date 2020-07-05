@@ -7,7 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 
-	"github.com/deepch/vdk/av"
+	"github.com/dbl0null/vdk/av"
 )
 
 var Config = loadConfig()
@@ -89,7 +89,6 @@ func (element *ConfigST) list() (string, []string) {
 	}
 	return fist, res
 }
-
 func (element *ConfigST) clDe(suuid, cuuid string) {
 	delete(element.Streams[suuid].Cl, cuuid)
 }
